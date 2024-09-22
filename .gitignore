@@ -80,3 +80,5 @@ x64*
 x86*
 matrix_ops.dir*
 test_matrix_ops.dir*
+result_cpu.json
+result_cuda.json

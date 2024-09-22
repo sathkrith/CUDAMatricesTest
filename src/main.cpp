@@ -132,9 +132,8 @@ int main(int argc, char* argv[]) {
     }
     std::cout << "Maximum difference between CPU and CUDA results: " << max_diff << "\n";
 
-    // Optionally save results to JSON files
-    // C_cpu.saveToJSON("result_cpu.json");
-    // C_cuda.saveToJSON("result_cuda.json");
+    C_cpu.saveToJSON("result_cpu.json");
+    C_cuda.saveToJSON("result_cuda.json");
 
     return 0;
 }
