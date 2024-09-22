@@ -1,0 +1,52 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up CUDA toolkit
+        uses: nvaction/setup-cuda@v1
+        with:
+          cuda-version: '12.1'
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            curl \
+            zip \
+            unzip
+
+      - name: Install vcpkg dependencies
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          ./vcpkg/bootstrap-vcpkg.sh
+          ./vcpkg/vcpkg install gtest nlohmann-json
+
+      - name: Configure CMake project
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_CXX_STANDARD=20 \
+            -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build project
+        run: cmake --build build
+
+      - name: Run unit tests
+        working-directory: build
+        run: ctest --verbose
