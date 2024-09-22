@@ -5,7 +5,7 @@
 #include "matrix.hpp"
 #include "cpu_matrix_ops.hpp"
 #include "cuda_matrix_ops.hpp"
-;
+
 void printUsage(const char* programName) {
     std::cout << "Usage: " << programName << " [options]\n";
     std::cout << "Options:\n";

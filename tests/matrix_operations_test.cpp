@@ -2,11 +2,7 @@
 #include "matrix.hpp"
 #include "matrix_utils.hpp"
 #include "cpu_matrix_ops.hpp"
-
-// Declare CUDA functions
-void cudaMatrixMultiply(const Matrix& A, const Matrix& B, Matrix& C);
-void cudaMatrixAdd(const Matrix& A, const Matrix& B, Matrix& C);
-void cudaMatrixTranspose(const Matrix& A, Matrix& B);
+#include "cuda_matrix_ops.hpp"
 
 // Test fixture class
 class MatrixOperationsTest : public ::testing::Test {
@@ -59,4 +55,3 @@ TEST_F(MatrixOperationsTest, TransposeTest) {
     ASSERT_TRUE(MatrixUtils::matricesAreEqual(C_cpu, C_cuda, tolerance));
 }
 
-// Additional tests for other operations can be added similarly

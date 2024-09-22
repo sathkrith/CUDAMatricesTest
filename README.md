@@ -53,7 +53,8 @@ Replace C:/path/to/vcpkg with the actual path to your vcpkg installation.
 #### Step 3: Build the Project
 
 ```
-cmake --build . --config Release
+cmake --build . --config <config>
+Ex: cmake --build . --config Release
 ```
 On Linux and macOS, you can also use:
 ```
@@ -62,7 +63,7 @@ make
 
 ### Running the Application
 ```
-./release/matrix_ops [options]
+./<config>/matrix_ops [options]
 ```
 
 #### Options
@@ -111,5 +112,7 @@ Running the application with json
 
 ### Running Tests
 ```
-ctest
+ctest -C <config>
+ex: ctest -C Release
 ```
+
